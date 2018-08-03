@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard1.6;net45</TargetFrameworks>
+    <RepositoryType>git</RepositoryType>
+    <Company>Booking Protect Ltd</Company>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <FileVersion>3.0.0.0</FileVersion>
+    <Description>Managed .NET client for InsuranceHub APIs</Description>
+    <Authors />
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Copyright>© 2015 Booking Protect Ltd.</Copyright>
+    <PackageTags>BookingProtect Booking Protect InsuranceHub</PackageTags>
+    <RepositoryUrl>https://github.com/Insure-Tech/InsuranceHub.Client.Net.git</RepositoryUrl>
+    <PackageProjectUrl>https://developers.bookingprotect.com</PackageProjectUrl>
+    <PackageIconUrl>https://developers.bookingprotect.com/favicon.ico</PackageIconUrl>
+  </PropertyGroup>
+
+  <!-- All frameworks -->
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+  <!-- .NET Standard 1.6 -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6'">
+    <PackageReference Include="System.Net.Requests" Version="4.3.0" />
+    <PackageReference Include="System.Net.Http" Version="4.3.3" />
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.6'">
+    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD1_6</DefineConstants>
+  </PropertyGroup>
+  
+  <!-- .NET Standard 2.0 -->
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
+    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
+  </PropertyGroup>
+
+
+  <!-- .NET 4.5 references, compilation flags and build options -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net45'">
+    <DefineConstants>NET45;NETFULL</DefineConstants>
+  </PropertyGroup>
+</Project>
