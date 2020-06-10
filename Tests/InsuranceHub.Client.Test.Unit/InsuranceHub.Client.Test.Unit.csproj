@@ -1,16 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.0;netcoreapp2.1;netcoreapp1.0;netcoreapp1.1;net452;net46;net472;</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0;netcoreapp3.1;netcoreapp1.0;netcoreapp1.1;net452;net46;net472;net48;</TargetFrameworks>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
-    <PackageReference Include="Moq" Version="4.9.0" />
     <PackageReference Include="RichardSzalay.MockHttp" Version="5.0.0" />
-    <PackageReference Include="xunit" Version="2.4.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
   
@@ -19,24 +17,69 @@
   </ItemGroup>
 
   <!-- .NET App 1.0 -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.0'">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.0" />
+    <PackageReference Include="Moq" Version="4.10.1" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.0'">
     <DefineConstants>NETCORE;NETCOREAPP;NETCOREAPP1_0</DefineConstants>
   </PropertyGroup>
 
   <!-- .NET App 1.1 -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1'">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.0" />
+    <PackageReference Include="Moq" Version="4.10.1" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1'">
     <DefineConstants>NETCORE;NETCOREAPP;NETCOREAPP1_1</DefineConstants>
   </PropertyGroup>
 
   <!-- .NET App 2.0 -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0'">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.0" />
+    <PackageReference Include="Moq" Version="4.14.1" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0'">
     <DefineConstants>NETCORE;NETCOREAPP;NETCOREAPP2_0</DefineConstants>
   </PropertyGroup>
 
   <!-- .NET App 2.1 -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1'">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.0" />
+    <PackageReference Include="Moq" Version="4.14.1" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1'">
     <DefineConstants>NETCORE;NETCOREAPP;NETCOREAPP2_1</DefineConstants>
   </PropertyGroup>
+
+  <!-- .NET App 2.2 -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.2'">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.0" />
+    <PackageReference Include="Moq" Version="4.14.1" />
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.2'">
+    <DefineConstants>NETCORE;NETCOREAPP;NETCOREAPP2_2</DefineConstants>
+  </PropertyGroup>
+
+  <!-- .NET App 3.0 -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0'">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+    <PackageReference Include="Moq" Version="4.14.1" />
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0'">
+    <DefineConstants>NETCORE;NETCOREAPP;NETCOREAPP3_0</DefineConstants>
+  </PropertyGroup>
+
+  <!-- .NET App 3.1 -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1'">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+    <PackageReference Include="Moq" Version="4.14.1" />
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1'">
+    <DefineConstants>NETCORE;NETCOREAPP;NETCOREAPP3_1</DefineConstants>
+  </PropertyGroup>
+
+
 
   <!-- .NET 4.52 -->
   <!-- xUnit does not support net45/net451 after they are out of official support by MS http://xunit.github.io/releases/2.2 -->
@@ -44,6 +87,8 @@
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Net.Http" />
+    <PackageReference Include="Moq" Version="4.14.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net452'">
     <DefineConstants>NET452;NETFULL</DefineConstants>
@@ -54,6 +99,8 @@
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Net.Http" />
+    <PackageReference Include="Moq" Version="4.14.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net46'">
     <DefineConstants>NET46;NETFULL</DefineConstants>
@@ -64,9 +111,23 @@
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Net.Http" />
+    <PackageReference Include="Moq" Version="4.14.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net472'">
     <DefineConstants>NET472;NETFULL</DefineConstants>
+  </PropertyGroup>
+
+  <!-- .NET 4.8 -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net48' ">
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Net.Http" />
+    <PackageReference Include="Moq" Version="4.14.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net48'">
+    <DefineConstants>NET48;NETFULL</DefineConstants>
   </PropertyGroup>
 
 </Project>

@@ -16,21 +16,20 @@
     <Version>3.0.0</Version>
   </PropertyGroup>
 
-  <!-- All frameworks -->
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-  </ItemGroup>
-
   <!-- .NET Standard 1.6 -->
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6'">
     <PackageReference Include="System.Net.Requests" Version="4.3.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.6'">
     <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD1_6</DefineConstants>
   </PropertyGroup>
   
   <!-- .NET Standard 2.0 -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="System.Text.Json" Version="4.7.2" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
     <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
   </PropertyGroup>
@@ -42,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Net.Http" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net45'">
     <DefineConstants>NET45;NETFULL</DefineConstants>
