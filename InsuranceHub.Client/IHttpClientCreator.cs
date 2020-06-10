@@ -4,7 +4,9 @@
 
     public interface IHttpClientCreator
     {
+#if NETFULL
         HttpClient Create();
+#endif
 
         HttpClient Create(IVendorCredentials credentials);
     }
