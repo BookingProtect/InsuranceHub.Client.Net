@@ -49,7 +49,7 @@
                 SharedSecret = sharedSecret
             };
             var proxyConfig = new ProxyConfiguration();
-            var hashGenerator = new HmacSha1HashGenerator(Encoding.UTF8);
+            var hashGenerator = new HmacSha256HashGenerator(Encoding.UTF8);
             var dateTimeProvider = new DateTimeProvider();
             var authTokenGenerator = new TokenGenerator(hashGenerator, dateTimeProvider);
 

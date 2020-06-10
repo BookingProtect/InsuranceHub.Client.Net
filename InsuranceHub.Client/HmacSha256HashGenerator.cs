@@ -5,11 +5,11 @@
     using System.Security.Cryptography;
     using System.Text;
 
-    public class HmacSha1HashGenerator : IHashGenerator
+    public class HmacSha256HashGenerator : IHashGenerator
     {
         private readonly Encoding _encoding;
 
-        public HmacSha1HashGenerator(Encoding encoding)
+        public HmacSha256HashGenerator(Encoding encoding)
         {
             _encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
         }
@@ -28,9 +28,9 @@
 
             var keyBytes = _encoding.GetBytes(key);
 
-            using (var sha = new HMACSHA1(keyBytes))
+            using (var sha = new HMACSHA256(keyBytes))
             {
-                byte[] byteArray = _encoding.GetBytes(data);
+                var byteArray = _encoding.GetBytes(data);
 
                 using (var stream = new MemoryStream(byteArray))
                 {
