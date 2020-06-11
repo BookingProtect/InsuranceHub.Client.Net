@@ -35,7 +35,7 @@ namespace InsuranceHub.Client.Test.Acceptance
             var vendorCredentials = rootConfig.GetSection("insuranceHub:credentials").Get<VendorCredentials>();
             var requestorConfig = rootConfig.GetSection("insuranceHub:offeringRequestService").Get<OfferingRequestorConfiguration>();
 
-            var requestor = new OfferingRequestor(requestorConfig, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha1HashGenerator(Encoding.UTF8), new DateTimeProvider()), vendorCredentials);
+            var requestor = new OfferingRequestor(requestorConfig, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), vendorCredentials);
 #endif
 
             var vendorReference = Guid.NewGuid();
@@ -80,7 +80,7 @@ namespace InsuranceHub.Client.Test.Acceptance
                 SharedSecret = secret
             };
 
-            var requestor = new OfferingRequestor(new OfferingRequestorConfiguration { ThrowExceptions = true }, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha1HashGenerator(Encoding.UTF8), new DateTimeProvider()), defaultCredentials);
+            var requestor = new OfferingRequestor(new OfferingRequestorConfiguration { ThrowExceptions = true }, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), defaultCredentials);
 #else
             var builder = new ConfigurationBuilder()
                 .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
@@ -94,7 +94,7 @@ namespace InsuranceHub.Client.Test.Acceptance
             var requestorConfig = rootConfig.GetSection("insuranceHub:offeringRequestService").Get<OfferingRequestorConfiguration>();
             requestorConfig.ThrowExceptions = true;
 
-            var requestor = new OfferingRequestor(requestorConfig, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha1HashGenerator(Encoding.UTF8), new DateTimeProvider()), vendorCredentials);
+            var requestor = new OfferingRequestor(requestorConfig, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), vendorCredentials);
 #endif
 
             var vendorReference = Guid.NewGuid();
@@ -142,7 +142,7 @@ namespace InsuranceHub.Client.Test.Acceptance
                 SharedSecret = secret
             };
 
-            var requestor = new OfferingRequestor(new OfferingRequestorConfiguration { ThrowExceptions = false }, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha1HashGenerator(Encoding.UTF8), new DateTimeProvider()), defaultCredentials);
+            var requestor = new OfferingRequestor(new OfferingRequestorConfiguration { ThrowExceptions = false }, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), defaultCredentials);
 #else
             var builder = new ConfigurationBuilder()
                 .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
@@ -156,7 +156,7 @@ namespace InsuranceHub.Client.Test.Acceptance
             var requestorConfig = rootConfig.GetSection("insuranceHub:offeringRequestService").Get<OfferingRequestorConfiguration>();
             requestorConfig.ThrowExceptions = false;
 
-            var requestor = new OfferingRequestor(requestorConfig, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha1HashGenerator(Encoding.UTF8), new DateTimeProvider()), vendorCredentials);
+            var requestor = new OfferingRequestor(requestorConfig, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), vendorCredentials);
 #endif
 
             var vendorReference = Guid.NewGuid();
@@ -203,11 +203,11 @@ namespace InsuranceHub.Client.Test.Acceptance
                 SharedSecret = secret
             };
 
-            var requestor = new OfferingRequestor(new OfferingRequestorConfiguration { ThrowExceptions = true }, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha1HashGenerator(Encoding.UTF8), new DateTimeProvider()), defaultCredentials);
+            var requestor = new OfferingRequestor(new OfferingRequestorConfiguration { ThrowExceptions = true }, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), defaultCredentials);
 #else
             var builder = new ConfigurationBuilder()
                 .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
-                .AddJsonFile("Insurancehub.Client.Test.Acceptance.json");
+                .AddJsonFile("InsuranceHub.Client.Test.Acceptance.json");
 
             var rootConfig = builder.Build();
 
@@ -216,7 +216,7 @@ namespace InsuranceHub.Client.Test.Acceptance
             var requestorConfig = rootConfig.GetSection("insuranceHub:offeringRequestService").Get<OfferingRequestorConfiguration>();
             requestorConfig.ThrowExceptions = true;
 
-            var requestor = new OfferingRequestor(requestorConfig, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha1HashGenerator(Encoding.UTF8), new DateTimeProvider()), vendorCredentials);
+            var requestor = new OfferingRequestor(requestorConfig, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), vendorCredentials);
 #endif
 
             var vendorReference = Guid.NewGuid();
@@ -265,7 +265,7 @@ namespace InsuranceHub.Client.Test.Acceptance
                 SharedSecret = secret
             };
 
-            var requestor = new OfferingRequestor(new OfferingRequestorConfiguration { ThrowExceptions = false }, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha1HashGenerator(Encoding.UTF8), new DateTimeProvider()), defaultCredentials);
+            var requestor = new OfferingRequestor(new OfferingRequestorConfiguration { ThrowExceptions = false }, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), defaultCredentials);
 #else
             var builder = new ConfigurationBuilder()
                 .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
@@ -278,7 +278,7 @@ namespace InsuranceHub.Client.Test.Acceptance
             var requestorConfig = rootConfig.GetSection("insuranceHub:offeringRequestService").Get<OfferingRequestorConfiguration>();
             requestorConfig.ThrowExceptions = false;
 
-            var requestor = new OfferingRequestor(requestorConfig, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha1HashGenerator(Encoding.UTF8), new DateTimeProvider()), vendorCredentials);
+            var requestor = new OfferingRequestor(requestorConfig, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), vendorCredentials);
 #endif
 
             var vendorReference = Guid.NewGuid();
@@ -326,7 +326,7 @@ namespace InsuranceHub.Client.Test.Acceptance
                 SharedSecret = secret
             };
 
-            var requestor = new OfferingRequestor(new OfferingRequestorConfiguration { ThrowExceptions = true }, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha1HashGenerator(Encoding.UTF8), new DateTimeProvider()), defaultCredentials);
+            var requestor = new OfferingRequestor(new OfferingRequestorConfiguration { ThrowExceptions = true }, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), defaultCredentials);
 #else
             var builder = new ConfigurationBuilder()
                 .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
@@ -339,7 +339,7 @@ namespace InsuranceHub.Client.Test.Acceptance
             var requestorConfig = rootConfig.GetSection("insuranceHub:offeringRequestService").Get<OfferingRequestorConfiguration>();
             requestorConfig.ThrowExceptions = true;
 
-            var requestor = new OfferingRequestor(requestorConfig, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha1HashGenerator(Encoding.UTF8), new DateTimeProvider()), vendorCredentials);
+            var requestor = new OfferingRequestor(requestorConfig, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), vendorCredentials);
 #endif
 
             var vendorReference = Guid.NewGuid();
@@ -388,7 +388,7 @@ namespace InsuranceHub.Client.Test.Acceptance
                 SharedSecret = secret
             };
 
-            var requestor = new OfferingRequestor(new OfferingRequestorConfiguration { ThrowExceptions = false }, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha1HashGenerator(Encoding.UTF8), new DateTimeProvider()), defaultCredentials);
+            var requestor = new OfferingRequestor(new OfferingRequestorConfiguration { ThrowExceptions = false }, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), defaultCredentials);
 #else
             var builder = new ConfigurationBuilder()
                 .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
@@ -401,7 +401,7 @@ namespace InsuranceHub.Client.Test.Acceptance
             var requestorConfig = rootConfig.GetSection("insuranceHub:offeringRequestService").Get<OfferingRequestorConfiguration>();
             requestorConfig.ThrowExceptions = false;
 
-            var requestor = new OfferingRequestor(requestorConfig, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha1HashGenerator(Encoding.UTF8), new DateTimeProvider()), vendorCredentials);
+            var requestor = new OfferingRequestor(requestorConfig, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), vendorCredentials);
 #endif
 
             var vendorReference = Guid.NewGuid();

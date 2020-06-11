@@ -28,7 +28,7 @@
 #else
             var builder = new ConfigurationBuilder()
                 .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
-                .AddJsonFile("Insurancehub.Client.Test.Acceptance.json");
+                .AddJsonFile("InsuranceHub.Client.Test.Acceptance.json");
 
             var rootConfig = builder.Build();
 
@@ -36,9 +36,9 @@
             var requestorConfig = rootConfig.GetSection("insuranceHub:offeringRequestService").Get<OfferingRequestorConfiguration>();
             var writerConfig = rootConfig.GetSection("insuranceHub:offeringResultService").Get<OfferingResultWriterConfiguration>();
 
-            var requestor = new OfferingRequestor(requestorConfig, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha1HashGenerator(Encoding.UTF8), new DateTimeProvider()), vendorCredentials);
+            var requestor = new OfferingRequestor(requestorConfig, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), vendorCredentials);
 
-            var writer = new OfferingResultWriter(writerConfig, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha1HashGenerator(Encoding.UTF8), new DateTimeProvider()), vendorCredentials);
+            var writer = new OfferingResultWriter(writerConfig, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), vendorCredentials);
 #endif
 
             var vendorReference = Guid.NewGuid();
