@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Net;
     using System.Text;
     using Model;
     using Xunit;
@@ -19,6 +20,11 @@
         public void When_ValidRequest_Write_Returns_OfferingWriteResult_Success_True()
         {
             // set up
+#if (NET452)
+            // explicitly support TLS 1.2
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+#endif
+
 #if NETFULL
             var vendorId = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.IdKey]);
             var secret = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.SharedSecretKey]); 
