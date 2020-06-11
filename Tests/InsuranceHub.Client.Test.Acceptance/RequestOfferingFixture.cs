@@ -20,6 +20,11 @@ namespace InsuranceHub.Client.Test.Acceptance
         public void When_ValidRequest_Request_Returns_Offering()
         {
             // set up
+#if (NET452)
+            // explicitly support TLS 1.2
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+#endif
+
 #if NETFULL
             var vendorId = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.IdKey]);
             var secret = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.SharedSecretKey]); 
@@ -67,9 +72,14 @@ namespace InsuranceHub.Client.Test.Acceptance
         }
 
         [Fact]
-        public void When_ThrowExcptions_IsTrue_InvalidCredentials_Request_Throws_WebException()
+        public void When_ThrowExceptions_IsTrue_InvalidCredentials_Request_Throws_WebException()
         {
             // set up
+#if (NET452)
+            // explicitly support TLS 1.2
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+#endif
+
 #if NETFULL
             var vendorId = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.IdKey]);
             var secret = Guid.NewGuid();
@@ -129,9 +139,14 @@ namespace InsuranceHub.Client.Test.Acceptance
         }
 
         [Fact]
-        public void When_ThrowExcptions_IsFalse_InvalidCredentials_Request_Returns_Offering_WithErrorResponse_401()
+        public void When_ThrowExceptions_IsFalse_InvalidCredentials_Request_Returns_Offering_WithErrorResponse_401()
         {
             // set up
+#if (NET452)
+            // explicitly support TLS 1.2
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+#endif
+
 #if NETFULL
             var vendorId = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.IdKey]);
             var secret = Guid.NewGuid();
@@ -190,9 +205,14 @@ namespace InsuranceHub.Client.Test.Acceptance
         }
 
         [Fact]
-        public void When_ThrowExcptions_IsTrue_UnknonwnCategoryCode_Request_Throws_WebException_500()
+        public void When_ThrowExceptions_IsTrue_UnknownCategoryCode_Request_Throws_WebException_500()
         {
             // set up
+#if (NET452)
+            // explicitly support TLS 1.2
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+#endif
+
 #if NETFULL
             var vendorId = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.IdKey]);
             var secret = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.SharedSecretKey]);
@@ -252,9 +272,14 @@ namespace InsuranceHub.Client.Test.Acceptance
         }
 
         [Fact]
-        public void When_ThrowExcptions_IsFalse_UnknonwnCategoryCode_Request_Returns_Offering_WithErrorResponse_500()
+        public void When_ThrowExceptions_IsFalse_UnknownCategoryCode_Request_Returns_Offering_WithErrorResponse_500()
         {
             // set up
+#if (NET452)
+            // explicitly support TLS 1.2
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+#endif
+
 #if NETFULL
             var vendorId = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.IdKey]);
             var secret = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.SharedSecretKey]);
@@ -316,6 +341,11 @@ namespace InsuranceHub.Client.Test.Acceptance
         public void When_ThrowExcptions_IsTrue_InvalidCompletionDate_Request_Throws_WebException_400()
         {
             // set up
+#if (NET452)
+            // explicitly support TLS 1.2
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+#endif
+
 #if NETFULL
             var vendorId = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.IdKey]);
             var secret = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.SharedSecretKey]);
@@ -378,6 +408,11 @@ namespace InsuranceHub.Client.Test.Acceptance
         public void When_ThrowExcptions_IsFalse_InvalidCompletionDate_Request_Returns_Offering_WithErrorResponse_400()
         {
             // set up
+#if (NET452)
+            // explicitly support TLS 1.2
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+#endif
+
 #if NETFULL
             var vendorId = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.IdKey]);
             var secret = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.SharedSecretKey]);
