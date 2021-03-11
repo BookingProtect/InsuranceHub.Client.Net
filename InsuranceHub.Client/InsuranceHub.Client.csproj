@@ -3,8 +3,8 @@
     <TargetFrameworks>netstandard2.0;netstandard1.6;net45</TargetFrameworks>
     <RepositoryType>git</RepositoryType>
     <Company>Booking Protect Ltd</Company>
-    <AssemblyVersion>4.0.0.0</AssemblyVersion>
-    <FileVersion>4.0.0.0</FileVersion>
+    <AssemblyVersion>4.1.0.0</AssemblyVersion>
+    <FileVersion>4.1.0.0</FileVersion>
     <Title>InsuranceHub.Client</Title>
     <Description>Managed .NET client for InsuranceHub APIs</Description>
     <Authors />
@@ -15,12 +15,12 @@
     <PackageProjectUrl>https://developers.bookingprotect.com</PackageProjectUrl>
     <PackageIconUrl>https://developers.bookingprotect.com/favicon.ico</PackageIconUrl>
     <PackageIcon>package-icon.png</PackageIcon>
-    <Version>4.0.0</Version>
+    <Version>4.1.0</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="package-icon.png" Pack="true" PackagePath="\"/>
+    <None Include="package-icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <!-- .NET Standard 1.6 -->
