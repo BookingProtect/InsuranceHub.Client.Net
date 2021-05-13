@@ -109,21 +109,23 @@
 
             if (response.IsSuccessStatusCode)
             {
-                offering = _deserializer.Deserialize<Offering>(response.Content.ReadAsStringAsync().Result);
+                var body = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                
+                offering = _deserializer.Deserialize<Offering>(body);
 
                 offering.Success = true;
             }
             else
             {
-                offering = ProcessUnsuccessfulRequest(response);
+                offering = await ProcessUnsuccessfulRequest(response);
             }
             
             return offering;
         }
 
-        private Offering ProcessUnsuccessfulRequest(HttpResponseMessage response)
+        private async Task<Offering> ProcessUnsuccessfulRequest(HttpResponseMessage response)
         {
-            var body = response.Content.ReadAsStringAsync().Result;
+            var body = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             ErrorResponse errorResponse = null;
             string message;

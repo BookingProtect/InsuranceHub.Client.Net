@@ -113,7 +113,7 @@
 
             if (!response.IsSuccessStatusCode)
             {
-                cancellationResponse = ProcessUnsuccessfulRequest(response);
+                cancellationResponse = await ProcessUnsuccessfulRequest(response);
             }
             else
             {
@@ -126,9 +126,9 @@
             return cancellationResponse;
         }
 
-        private OfferingSaleCancellationResponse ProcessUnsuccessfulRequest(HttpResponseMessage response)
+        private async Task<OfferingSaleCancellationResponse> ProcessUnsuccessfulRequest(HttpResponseMessage response)
         {
-            var body = response.Content.ReadAsStringAsync().Result;
+            var body = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             ErrorResponse errorResponse = null;
             string message;

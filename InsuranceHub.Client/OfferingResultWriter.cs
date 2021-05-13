@@ -112,15 +112,15 @@
             }
             else
             {
-                writeResponse = ProcessUnsuccessfulRequest(response);
+                writeResponse = await ProcessUnsuccessfulRequest(response);
             }
 
             return writeResponse;
         }
 
-        private OfferingResultWriteResponse ProcessUnsuccessfulRequest(HttpResponseMessage response)
+        private async Task<OfferingResultWriteResponse> ProcessUnsuccessfulRequest(HttpResponseMessage response)
         {
-            var body = response.Content.ReadAsStringAsync().Result;
+            var body = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             ErrorResponse errorResponse = null;
             string message;
