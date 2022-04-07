@@ -90,6 +90,7 @@
                 VendorSaleReference = "InvoiceNumber",
                 CustomerForename = "Forename",
                 CustomerSurname = "Surname",
+                EmailAddress = "testmail@address.com",
                 Sales = sales.ToArray()
             };
 

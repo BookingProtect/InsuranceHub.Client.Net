@@ -1,0 +1,13 @@
+1) open project in visual studio
+2) open project properties > package
+3) update package version
+4) update Assembly version
+5) update Assembly file version
+6) select Release build 
+6) right click project > Pack
+7) confirm nupkg file created in bin/Release folder
+8) open command prompt in bin/Release 
+9) login to nuget and get api key (create a new one if expired) - https://www.nuget.org/account/apikeys
+9) run publish command below replacing package name and api key
+	
+	dotnet nuget push InsuranceHub.Client.X.X.X.nupkg --api-key <api-key> --source https://api.nuget.org/v3/index.json

@@ -14,6 +14,8 @@
 
         public string CustomerSurname { get; set; }
 
+        public string EmailAddress { get; set; }
+
         public ProductSale[] Sales { get; set; }
 
         public DateTime CreatedUtcDate { get; set; }
