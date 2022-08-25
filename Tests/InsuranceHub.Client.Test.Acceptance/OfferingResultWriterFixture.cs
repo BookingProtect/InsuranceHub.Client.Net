@@ -91,6 +91,7 @@
                 CustomerForename = "Forename",
                 CustomerSurname = "Surname",
                 EmailAddress = "testmail@address.com",
+                PhoneNumber = "+0123456789",
                 Sales = sales.ToArray()
             };
 
