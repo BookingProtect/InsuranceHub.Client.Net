@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0;netcoreapp3.1;netcoreapp1.0;netcoreapp1.1;net452;net46;net472;net48;</TargetFrameworks>
+    <TargetFrameworks>net462;net481;netcoreapp2.1;netcoreapp3.0;netcoreapp3.1;net8.0;net9.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RichardSzalay.MockHttp" Version="5.0.0" />
-    <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
+    <PackageReference Include="RichardSzalay.MockHttp" Version="6.0.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="Moq" Version="4.14.1" />
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
   
@@ -16,55 +16,38 @@
     <ProjectReference Include="..\..\InsuranceHub.Client\InsuranceHub.Client.csproj" />
   </ItemGroup>
 
-  <!-- .NET App 1.0 -->
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.0'">
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.0" />
-    <PackageReference Include="Moq" Version="4.10.1" />
+  <!-- .NET 8.0 -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0'">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
   </ItemGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.0'">
-    <DefineConstants>NETCORE;NETCOREAPP;NETCOREAPP1_0</DefineConstants>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net8.0'">
+    <DefineConstants>NET;NETX;NET8_0</DefineConstants>
   </PropertyGroup>
 
-  <!-- .NET App 1.1 -->
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1'">
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.0" />
-    <PackageReference Include="Moq" Version="4.10.1" />
+  <!-- .NET 9.0 -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net9.0'">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
   </ItemGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1'">
-    <DefineConstants>NETCORE;NETCOREAPP;NETCOREAPP1_1</DefineConstants>
-  </PropertyGroup>
-
-  <!-- .NET App 2.0 -->
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0'">
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.0" />
-    <PackageReference Include="Moq" Version="4.14.1" />
-  </ItemGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0'">
-    <DefineConstants>NETCORE;NETCOREAPP;NETCOREAPP2_0</DefineConstants>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net9.0'">
+    <DefineConstants>NET;NETX;NET9_0</DefineConstants>
   </PropertyGroup>
 
   <!-- .NET App 2.1 -->
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1'">
+    <PackageReference Include="Microsoft.NETCore.App" Version="2.1.30" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.0" />
-    <PackageReference Include="Moq" Version="4.14.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1'">
     <DefineConstants>NETCORE;NETCOREAPP;NETCOREAPP2_1</DefineConstants>
   </PropertyGroup>
 
-  <!-- .NET App 2.2 -->
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.2'">
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.0" />
-    <PackageReference Include="Moq" Version="4.14.1" />
-  </ItemGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.2'">
-    <DefineConstants>NETCORE;NETCOREAPP;NETCOREAPP2_2</DefineConstants>
-  </PropertyGroup>
-
   <!-- .NET App 3.0 -->
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0'">
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
-    <PackageReference Include="Moq" Version="4.14.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0'">
     <DefineConstants>NETCORE;NETCOREAPP;NETCOREAPP3_0</DefineConstants>
@@ -72,62 +55,34 @@
 
   <!-- .NET App 3.1 -->
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1'">
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
-    <PackageReference Include="Moq" Version="4.14.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1'">
     <DefineConstants>NETCORE;NETCOREAPP;NETCOREAPP3_1</DefineConstants>
   </PropertyGroup>
 
-
-
-  <!-- .NET 4.52 -->
-  <!-- xUnit does not support net45/net451 after they are out of official support by MS http://xunit.github.io/releases/2.2 -->
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
+  <!-- .NET 4.6.2 -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net462' ">
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Net.Http" />
-    <PackageReference Include="Moq" Version="4.14.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
   </ItemGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net452'">
-    <DefineConstants>NET452;NETFULL</DefineConstants>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net462'">
+    <DefineConstants>NET462;NETFRAMEWORK</DefineConstants>
   </PropertyGroup>
 
-  <!-- .NET 4.6 -->
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
+  <!-- .NET 4.8.1 -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net481' ">
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Net.Http" />
-    <PackageReference Include="Moq" Version="4.14.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
   </ItemGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net46'">
-    <DefineConstants>NET46;NETFULL</DefineConstants>
-  </PropertyGroup>
-
-  <!-- .NET 4.72 -->
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
-    <Reference Include="mscorlib" />
-    <Reference Include="System" />
-    <Reference Include="System.Net.Http" />
-    <PackageReference Include="Moq" Version="4.14.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
-  </ItemGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net472'">
-    <DefineConstants>NET472;NETFULL</DefineConstants>
-  </PropertyGroup>
-
-  <!-- .NET 4.8 -->
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net48' ">
-    <Reference Include="mscorlib" />
-    <Reference Include="System" />
-    <Reference Include="System.Net.Http" />
-    <PackageReference Include="Moq" Version="4.14.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
-  </ItemGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net48'">
-    <DefineConstants>NET48;NETFULL</DefineConstants>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net481'">
+    <DefineConstants>NET481;NETFRAMEWORK</DefineConstants>
   </PropertyGroup>
 
 </Project>

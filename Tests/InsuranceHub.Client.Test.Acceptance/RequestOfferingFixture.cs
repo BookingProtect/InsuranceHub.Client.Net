@@ -7,7 +7,7 @@ namespace InsuranceHub.Client.Test.Acceptance
     using Model;
     using Xunit;
 
-#if NETFULL
+#if NETFRAMEWORK
     using System.Configuration;
 #else
     using System.IO;
@@ -20,19 +20,14 @@ namespace InsuranceHub.Client.Test.Acceptance
         public void When_ValidRequest_Request_Returns_Offering()
         {
             // set up
-#if (NET452)
-            // explicitly support TLS 1.2
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-#endif
-
-#if NETFULL
+#if NETFRAMEWORK
             var vendorId = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.IdKey]);
             var secret = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.SharedSecretKey]); 
 
             var requestor = OfferingRequestor.Create(vendorId, secret);
 #else
             var builder = new ConfigurationBuilder()
-                .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
+                .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
                 .AddJsonFile("Insurancehub.Client.Test.Acceptance.json");
 
             var rootConfig = builder.Build();
@@ -52,7 +47,7 @@ namespace InsuranceHub.Client.Test.Acceptance
 
             var request = new OfferingRequest
             {
-#if NETFULL
+#if NETFRAMEWORK
                 VendorId = vendorId,
 #else
                 VendorId = vendorCredentials.Id,
@@ -75,12 +70,7 @@ namespace InsuranceHub.Client.Test.Acceptance
         public void When_ThrowExceptions_IsTrue_InvalidCredentials_Request_Throws_WebException()
         {
             // set up
-#if (NET452)
-            // explicitly support TLS 1.2
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-#endif
-
-#if NETFULL
+#if NETFRAMEWORK
             var vendorId = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.IdKey]);
             var secret = Guid.NewGuid();
 
@@ -93,7 +83,7 @@ namespace InsuranceHub.Client.Test.Acceptance
             var requestor = new OfferingRequestor(new OfferingRequestorConfiguration { ThrowExceptions = true }, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), defaultCredentials);
 #else
             var builder = new ConfigurationBuilder()
-                .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
+                .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
                 .AddJsonFile("Insurancehub.Client.Test.Acceptance.json");
 
             var rootConfig = builder.Build();
@@ -116,7 +106,7 @@ namespace InsuranceHub.Client.Test.Acceptance
 
             var request = new OfferingRequest
             {
-#if NETFULL
+#if NETFRAMEWORK
                 VendorId = vendorId,
 #else
                 VendorId = vendorCredentials.Id,
@@ -142,12 +132,7 @@ namespace InsuranceHub.Client.Test.Acceptance
         public void When_ThrowExceptions_IsFalse_InvalidCredentials_Request_Returns_Offering_WithErrorResponse_401()
         {
             // set up
-#if (NET452)
-            // explicitly support TLS 1.2
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-#endif
-
-#if NETFULL
+#if NETFRAMEWORK
             var vendorId = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.IdKey]);
             var secret = Guid.NewGuid();
 
@@ -160,7 +145,7 @@ namespace InsuranceHub.Client.Test.Acceptance
             var requestor = new OfferingRequestor(new OfferingRequestorConfiguration { ThrowExceptions = false }, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), defaultCredentials);
 #else
             var builder = new ConfigurationBuilder()
-                .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
+                .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
                 .AddJsonFile("Insurancehub.Client.Test.Acceptance.json");
 
             var rootConfig = builder.Build();
@@ -183,7 +168,7 @@ namespace InsuranceHub.Client.Test.Acceptance
 
             var request = new OfferingRequest
             {
-#if NETFULL
+#if NETFRAMEWORK
                 VendorId = vendorId,
 #else
                 VendorId = vendorCredentials.Id,
@@ -208,12 +193,7 @@ namespace InsuranceHub.Client.Test.Acceptance
         public void When_ThrowExceptions_IsTrue_UnknownCategoryCode_Request_Throws_WebException_500()
         {
             // set up
-#if (NET452)
-            // explicitly support TLS 1.2
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-#endif
-
-#if NETFULL
+#if NETFRAMEWORK
             var vendorId = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.IdKey]);
             var secret = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.SharedSecretKey]);
 
@@ -226,7 +206,7 @@ namespace InsuranceHub.Client.Test.Acceptance
             var requestor = new OfferingRequestor(new OfferingRequestorConfiguration { ThrowExceptions = true }, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), defaultCredentials);
 #else
             var builder = new ConfigurationBuilder()
-                .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
+                .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
                 .AddJsonFile("InsuranceHub.Client.Test.Acceptance.json");
 
             var rootConfig = builder.Build();
@@ -248,7 +228,7 @@ namespace InsuranceHub.Client.Test.Acceptance
 
             var request = new OfferingRequest
             {
-#if NETFULL
+#if NETFRAMEWORK
                 VendorId = vendorId,
 #else
                 VendorId = vendorCredentials.Id,
@@ -264,7 +244,7 @@ namespace InsuranceHub.Client.Test.Acceptance
             // verify
             Assert.IsType<WebException>(ex.GetBaseException());
             var baseEx = (WebException)ex.GetBaseException();
-            Assert.Equal($"Unable to obtain offering for request : Product not forund for VendorId:'{request.VendorId:N}' and CategoryCode:'Unknown'", baseEx.Message);
+            Assert.Equal($"Unable to obtain offering for request : Product not found for VendorId:'{request.VendorId:N}' and CategoryCode:'Unknown'", baseEx.Message);
             Assert.NotNull(baseEx.Response);
             Assert.IsType<SimpleWebResponse>(baseEx.Response);
             var response = (SimpleWebResponse)baseEx.Response;
@@ -275,12 +255,7 @@ namespace InsuranceHub.Client.Test.Acceptance
         public void When_ThrowExceptions_IsFalse_UnknownCategoryCode_Request_Returns_Offering_WithErrorResponse_500()
         {
             // set up
-#if (NET452)
-            // explicitly support TLS 1.2
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-#endif
-
-#if NETFULL
+#if NETFRAMEWORK
             var vendorId = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.IdKey]);
             var secret = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.SharedSecretKey]);
 
@@ -293,7 +268,7 @@ namespace InsuranceHub.Client.Test.Acceptance
             var requestor = new OfferingRequestor(new OfferingRequestorConfiguration { ThrowExceptions = false }, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), defaultCredentials);
 #else
             var builder = new ConfigurationBuilder()
-                .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
+                .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
                 .AddJsonFile("Insurancehub.Client.Test.Acceptance.json");
 
             var rootConfig = builder.Build();
@@ -315,7 +290,7 @@ namespace InsuranceHub.Client.Test.Acceptance
 
             var request = new OfferingRequest
             {
-#if NETFULL
+#if NETFRAMEWORK
                 VendorId = vendorId,
 #else
                 VendorId = vendorCredentials.Id,
@@ -333,7 +308,7 @@ namespace InsuranceHub.Client.Test.Acceptance
             Assert.NotNull(actual.ErrorResponse);
             Assert.IsType<Offering>(actual);
             Assert.False(actual.Success);
-            Assert.Equal($"Product not forund for VendorId:'{request.VendorId:N}' and CategoryCode:'Unknown'", actual.ErrorResponse.Message);
+            Assert.Equal($"Product not found for VendorId:'{request.VendorId:N}' and CategoryCode:'Unknown'", actual.ErrorResponse.Message);
             Assert.Equal(HttpStatusCode.InternalServerError, actual.ErrorResponse.HttpStatusCode);
         }
 
@@ -341,12 +316,7 @@ namespace InsuranceHub.Client.Test.Acceptance
         public void When_ThrowExcptions_IsTrue_InvalidCompletionDate_Request_Throws_WebException_400()
         {
             // set up
-#if (NET452)
-            // explicitly support TLS 1.2
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-#endif
-
-#if NETFULL
+#if NETFRAMEWORK
             var vendorId = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.IdKey]);
             var secret = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.SharedSecretKey]);
 
@@ -359,7 +329,7 @@ namespace InsuranceHub.Client.Test.Acceptance
             var requestor = new OfferingRequestor(new OfferingRequestorConfiguration { ThrowExceptions = true }, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), defaultCredentials);
 #else
             var builder = new ConfigurationBuilder()
-                .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
+                .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
                 .AddJsonFile("Insurancehub.Client.Test.Acceptance.json");
 
             var rootConfig = builder.Build();
@@ -381,7 +351,7 @@ namespace InsuranceHub.Client.Test.Acceptance
 
             var request = new OfferingRequest
             {
-#if NETFULL
+#if NETFRAMEWORK
                 VendorId = vendorId,
 #else
                 VendorId = vendorCredentials.Id,
@@ -408,12 +378,7 @@ namespace InsuranceHub.Client.Test.Acceptance
         public void When_ThrowExcptions_IsFalse_InvalidCompletionDate_Request_Returns_Offering_WithErrorResponse_400()
         {
             // set up
-#if (NET452)
-            // explicitly support TLS 1.2
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-#endif
-
-#if NETFULL
+#if NETFRAMEWORK
             var vendorId = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.IdKey]);
             var secret = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.SharedSecretKey]);
 
@@ -426,7 +391,7 @@ namespace InsuranceHub.Client.Test.Acceptance
             var requestor = new OfferingRequestor(new OfferingRequestorConfiguration { ThrowExceptions = false }, new JsonSerializer(), new JsonDeserializer(), new HttpClientCreator(new ProxyConfiguration()), new TokenGenerator(new HmacSha256HashGenerator(Encoding.UTF8), new DateTimeProvider()), defaultCredentials);
 #else
             var builder = new ConfigurationBuilder()
-                .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
+                .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
                 .AddJsonFile("Insurancehub.Client.Test.Acceptance.json");
 
             var rootConfig = builder.Build();
@@ -448,7 +413,7 @@ namespace InsuranceHub.Client.Test.Acceptance
 
             var request = new OfferingRequest
             {
-#if NETFULL
+#if NETFRAMEWORK
                 VendorId = vendorId,
 #else
                 VendorId = vendorCredentials.Id,
@@ -476,19 +441,14 @@ namespace InsuranceHub.Client.Test.Acceptance
         public void When_ProductValueOutsideOfPriceStructure_Request_Returns_OfferingWithProductsOutsideOfPricingArrayNoProductOfferings()
         {
             // set up
-#if (NET452)
-            // explicitly support TLS 1.2
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-#endif
-
-#if NETFULL
+#if NETFRAMEWORK
             var vendorId = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.IdKey]);
             var secret = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.SharedSecretKey]); 
 
             var requestor = OfferingRequestor.Create(vendorId, secret);
 #else
             var builder = new ConfigurationBuilder()
-                .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
+                .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
                 .AddJsonFile("Insurancehub.Client.Test.Acceptance.json");
 
             var rootConfig = builder.Build();
@@ -511,7 +471,7 @@ namespace InsuranceHub.Client.Test.Acceptance
 
             var request = new OfferingRequest
             {
-#if NETFULL
+#if NETFRAMEWORK
                 VendorId = vendorId,
 #else
                 VendorId = vendorCredentials.Id,
@@ -545,19 +505,14 @@ namespace InsuranceHub.Client.Test.Acceptance
         public void When_OneProductValueOutsideOfPriceStructure_Request_Returns_OfferingWithOneProductsOutsideOfPricingAndPrice()
         {
             // set up
-#if (NET452)
-            // explicitly support TLS 1.2
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-#endif
-
-#if NETFULL
+#if NETFRAMEWORK
             var vendorId = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.IdKey]);
             var secret = Guid.Parse(ConfigurationManager.AppSettings[VendorCredentialsFromConfig.SharedSecretKey]); 
 
             var requestor = OfferingRequestor.Create(vendorId, secret);
 #else
             var builder = new ConfigurationBuilder()
-                .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
+                .SetBasePath(string.Concat(Directory.GetCurrentDirectory(), @"\..\..\..\..\..\..\..\InsuranceHub.Tests.Configuration"))
                 .AddJsonFile("Insurancehub.Client.Test.Acceptance.json");
 
             var rootConfig = builder.Build();
@@ -580,7 +535,7 @@ namespace InsuranceHub.Client.Test.Acceptance
 
             var request = new OfferingRequest
             {
-#if NETFULL
+#if NETFRAMEWORK
                 VendorId = vendorId,
 #else
                 VendorId = vendorCredentials.Id,

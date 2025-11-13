@@ -1,4 +1,4 @@
-﻿#if NETFULL
+﻿#if NETFRAMEWORK
 
 namespace InsuranceHub.Client
 {

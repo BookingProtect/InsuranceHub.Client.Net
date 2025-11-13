@@ -11,5 +11,11 @@
         public Product[] Products { get; set; }
 
         public bool PremiumAsSummary { get; set; }
+
+        public string CustomerCountryCode { get; set; }
+
+        public string CustomerUserAgent { get; set; }
+
+        public string SalesChannel { get; set; }
     }
 }

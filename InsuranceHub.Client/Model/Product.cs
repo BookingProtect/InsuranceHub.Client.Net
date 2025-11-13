@@ -13,5 +13,15 @@
         public string LanguageCode { get; set; }
 
         public DateTime CompletionDate { get; set; }
+
+        public string EventName { get; set; }
+
+        public string VenueName { get; set; }
+
+        public string PrimaryCategoryType { get; set; }
+
+        public string SecondaryCategoryType { get; set; }
+
+        public string Grade { get; set; }
     }
 }

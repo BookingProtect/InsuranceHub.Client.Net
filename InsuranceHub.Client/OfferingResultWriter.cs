@@ -32,7 +32,7 @@
             _defaultCredentials = defaultCredentials;
         }
 
-#if NETFULL
+#if NETFRAMEWORK
         public static IOfferingResultWriter Create()
         {
             var credentials = new VendorCredentialsFromConfig();
@@ -72,7 +72,7 @@
 
             if (_defaultCredentials == null)
             {
-#if NETFULL
+#if NETFRAMEWORK
                 credentials = new VendorCredentialsFromConfig();
 #else
                 throw new InvalidOperationException("No default credentials defined");

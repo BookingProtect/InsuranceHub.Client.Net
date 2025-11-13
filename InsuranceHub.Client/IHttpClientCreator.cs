@@ -4,7 +4,7 @@
 
     public interface IHttpClientCreator
     {
-#if NETFULL
+#if NETFRAMEWORK
         HttpClient Create();
 #endif
 

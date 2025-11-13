@@ -22,7 +22,7 @@
             _proxyConfiguration = proxyConfiguration ?? throw new ArgumentNullException(nameof(proxyConfiguration));
         }
 
-#if NETFULL
+#if NETFRAMEWORK
         public HttpClient Create()
         {
             return Create(new VendorCredentialsFromConfig());

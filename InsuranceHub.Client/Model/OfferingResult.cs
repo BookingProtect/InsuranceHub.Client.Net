@@ -21,5 +21,11 @@
         public ProductSale[] Sales { get; set; }
 
         public DateTime CreatedUtcDate { get; set; }
+
+        public string CustomerCountryCode { get; set; }
+
+        public string CustomerUserAgent { get; set; }
+
+        public string SalesChannel { get; set; }
     }
 }

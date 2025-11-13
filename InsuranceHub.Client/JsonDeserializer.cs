@@ -1,8 +1,8 @@
 ﻿namespace InsuranceHub.Client
 {
     using System;
-    
-#if NETSTANDARD2_0
+
+#if NETSTANDARD2_0 || NETX
     using System.Text.Json;
 #else
     using Newtonsoft.Json;
@@ -10,7 +10,7 @@
 
     public class JsonDeserializer : IDeserializer
     {
-#if NETSTANDARD2_0
+#if NETSTANDARD2_0 || NETX
         private readonly JsonSerializerOptions _options;
 
         public JsonDeserializer()
@@ -30,7 +30,7 @@
                 throw new ArgumentNullException(nameof(item));
             }
 
-#if NETSTANDARD2_0
+#if NETSTANDARD2_0 || NETX
             return System.Text.Json.JsonSerializer.Deserialize<T>(item, _options);
 #else
             return JsonConvert.DeserializeObject<T>(item);
