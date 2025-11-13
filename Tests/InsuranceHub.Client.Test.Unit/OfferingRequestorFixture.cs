@@ -4,13 +4,14 @@
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
+    using System.Threading.Tasks;
     using Client;
     using Model;
     using Moq;
     using RichardSzalay.MockHttp;
     using Xunit;
 
-#if NETFULL
+#if NETFRAMEWORK
     using System.Configuration;
 #endif
 
@@ -255,10 +256,10 @@
         }
 
         [Fact]
-        public void When_HttpClient_SendAsync_Is_Successful_Then_RequestAsync_Returns_Offering()
+        public async Task When_HttpClient_SendAsync_Is_Successful_Then_RequestAsync_Returns_Offering()
         {
             // execute
-            var actual = _subject.RequestAsync(_offeringRequest).Result;
+            var actual = await _subject.RequestAsync(_offeringRequest);
 
             // verify
             Assert.Equal(_offering, actual);
@@ -266,20 +267,20 @@
         }
 
         [Fact]
-        public void RequestAsync_Calls_AuthTokenGenerator_Generate()
+        public async Task RequestAsync_Calls_AuthTokenGenerator_Generate()
         {
             // execute
-            var actual = _subject.RequestAsync(_offeringRequest).Result;
+            var actual = await _subject.RequestAsync(_offeringRequest);
 
             // verify
             _authTokenGenerator.Verify(x => x.Generate(_id, _secret), Times.Once);
         }
 
         [Fact]
-        public void When_WebResponse_IsSuccess_RequestAsync_Calls_Deserializer_Deserialize_Offering()
+        public async Task When_WebResponse_IsSuccess_RequestAsync_Calls_Deserializer_Deserialize_Offering()
         {
             // execute
-            var actual = _subject.RequestAsync(_offeringRequest).Result;
+            var actual = await _subject.RequestAsync(_offeringRequest);
 
             // verify
             _deserializer.Verify(x => x.Deserialize<Offering>(_okResponseBody), Times.Once);
@@ -287,40 +288,40 @@
 
         #region Error Responses when ThrowException true
         [Fact]
-        public void When_WebResponse_IsInvalid_RequestAsync_Calls_Deserializer_Deserialize_ErrorResponse()
+        public async Task When_WebResponse_IsInvalid_RequestAsync_Calls_Deserializer_Deserialize_ErrorResponse()
         {
             // execute
-            var ex = Assert.ThrowsAsync<WebException>(() => _subject.RequestAsync(_offeringRequestInvalid)).Result;
+            var ex = await Assert.ThrowsAsync<WebException>(() => _subject.RequestAsync(_offeringRequestInvalid));
 
             // verify
             _deserializer.Verify(x => x.Deserialize<ErrorResponse>(_invalidResponseBody), Times.Once);
         }
 
         [Fact]
-        public void When_WebResponse_IsError_With_NoBody_RequestAsync_DoesNotCall_Deserializer_Deserialize_ErrorResponse()
+        public async Task When_WebResponse_IsError_With_NoBody_RequestAsync_DoesNotCall_Deserializer_Deserialize_ErrorResponse()
         {
             // execute
-            var ex = Assert.ThrowsAsync<WebException>(() => _subject.RequestAsync(_offeringRequestErrorWithNoBody)).Result;
+            var ex = await Assert.ThrowsAsync<WebException>(() => _subject.RequestAsync(_offeringRequestErrorWithNoBody));
 
             // verify
             _deserializer.Verify(x => x.Deserialize<ErrorResponse>(It.IsAny<string>()), Times.Never);
         }
 
         [Fact]
-        public void When_WebResponse_IsError_RequestAsync_Calls_Deserializer_Deserialize_ErrorResponse()
+        public async Task When_WebResponse_IsError_RequestAsync_Calls_Deserializer_Deserialize_ErrorResponse()
         {
             // execute
-            var ex = Assert.ThrowsAsync<WebException>(() => _subject.RequestAsync(_offeringRequestError)).Result;
+            var ex = await Assert.ThrowsAsync<WebException>(() => _subject.RequestAsync(_offeringRequestError));
 
             // verify
             _deserializer.Verify(x => x.Deserialize<ErrorResponse>(_errorResponseBody), Times.Once);
         }
 
         [Fact]
-        public void When_WebResponse_IsError_WithNoBody_RequestAsync_Throws_WebException()
+        public async Task When_WebResponse_IsError_WithNoBody_RequestAsync_Throws_WebException()
         {
             // execute
-            var ex = Assert.ThrowsAsync<WebException>(() => _subject.RequestAsync(_offeringRequestErrorWithNoBody)).Result;
+            var ex = await Assert.ThrowsAsync<WebException>(() => _subject.RequestAsync(_offeringRequestErrorWithNoBody));
 
             // verify
             Assert.IsType<SimpleWebResponse>(ex.Response);
@@ -330,10 +331,10 @@
         }
 
         [Fact]
-        public void When_WebResponse_IsError_RequestAsync_Throws_WebException()
+        public async Task When_WebResponse_IsError_RequestAsync_Throws_WebException()
         {
             // execute
-            var ex = Assert.ThrowsAsync<WebException>(() => _subject.RequestAsync(_offeringRequestError)).Result;
+            var ex = await Assert.ThrowsAsync<WebException>(() => _subject.RequestAsync(_offeringRequestError));
 
             // verify
             Assert.IsType<SimpleWebResponse>(ex.Response);
@@ -343,10 +344,10 @@
         }
 
         [Fact]
-        public void When_WebResponse_IsInvalid_RequestAsync_Throws_WebException()
+        public async Task When_WebResponse_IsInvalid_RequestAsync_Throws_WebException()
         {
             // execute
-            var ex = Assert.ThrowsAsync<WebException>(() => _subject.RequestAsync(_offeringRequestInvalid)).Result;
+            var ex = await Assert.ThrowsAsync<WebException>(() => _subject.RequestAsync(_offeringRequestInvalid));
 
             // verify
             Assert.IsType<SimpleWebResponse>(ex.Response);
@@ -358,14 +359,14 @@
 
         #region Error Responses when ThrowException false
         [Fact]
-        public void When_WebResponse_IsError_WithNoBody_RequestAsync_Returns_Offering_With_ErrorResponse()
+        public async Task When_WebResponse_IsError_WithNoBody_RequestAsync_Returns_Offering_With_ErrorResponse()
         {
             // setup
             _throwErrors = false;
             _configuration.Setup(x => x.ThrowExceptions).Returns(_throwErrors);
 
             // execute
-            var actual = _subject.RequestAsync(_offeringRequestErrorWithNoBody).Result;
+            var actual = await _subject.RequestAsync(_offeringRequestErrorWithNoBody);
 
             // verify
             Assert.NotNull(actual.ErrorResponse);
@@ -375,14 +376,14 @@
         }
 
         [Fact]
-        public void When_WebResponse_IsError_RequestAsync_Returns_Offering_With_ErrorResponse()
+        public async Task When_WebResponse_IsError_RequestAsync_Returns_Offering_With_ErrorResponse()
         {
             // setup
             _throwErrors = false;
             _configuration.Setup(x => x.ThrowExceptions).Returns(_throwErrors);
 
             // execute
-            var actual = _subject.RequestAsync(_offeringRequestError).Result;
+            var actual = await _subject.RequestAsync(_offeringRequestError);
 
             // verify
             Assert.NotNull(actual.ErrorResponse);
@@ -392,14 +393,14 @@
         }
 
         [Fact]
-        public void When_WebResponse_IsInvalid_RequestAsync_Returns_Offering_With_ErrorResponse()
+        public async Task When_WebResponse_IsInvalid_RequestAsync_Returns_Offering_With_ErrorResponse()
         {
             // setup
             _throwErrors = false;
             _configuration.Setup(x => x.ThrowExceptions).Returns(_throwErrors);
 
             // execute
-            var actual = _subject.RequestAsync(_offeringRequestInvalid).Result;
+            var actual = await _subject.RequestAsync(_offeringRequestInvalid);
 
             // verify
             Assert.NotNull(actual.ErrorResponse);
@@ -410,7 +411,7 @@
         }
         #endregion
 
-#if NETCORE
+#if NET
         [Fact]
         public void When_NoDefaultCredentials_Then_Request_Throws_InvalidOperationException()
         {
@@ -427,7 +428,7 @@
         }
 #endif
 
-#if NETFULL
+#if NETFRAMEWORK
         [Fact]
         public void When_NoDefaultCredentials_Then_Request_Uses_VendorCredentialsFromConfig()
         {

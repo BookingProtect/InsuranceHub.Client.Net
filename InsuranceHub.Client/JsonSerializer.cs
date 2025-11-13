@@ -2,7 +2,7 @@
 {
     using System;
 
-#if NETSTANDARD2_0
+#if NETSTANDARD2_0 || NETX
     using System.Text.Json;
 #else
     using Newtonsoft.Json;
@@ -12,7 +12,7 @@
 
     public class JsonSerializer : ISerializer
     {
-#if NETSTANDARD2_0
+#if NETSTANDARD2_0 || NETX
         private readonly JsonSerializerOptions _options;
 
         public JsonSerializer()
@@ -33,7 +33,7 @@
             }
 
 
-#if NETSTANDARD2_0
+#if NETSTANDARD2_0 || NETX
             return System.Text.Json.JsonSerializer.Serialize(item, _options);
 #else
             return JsonConvert.SerializeObject(

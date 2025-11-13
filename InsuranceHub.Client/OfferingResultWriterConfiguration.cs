@@ -1,13 +1,13 @@
 ﻿namespace InsuranceHub.Client
 {
     using System;
-#if NETFULL
+#if NETFRAMEWORK
     using System.Configuration;
 #endif
 
     public class OfferingResultWriterConfiguration : IOfferingResultWriterConfiguration
     {
-#if NETFULL
+#if NETFRAMEWORK
         public const string InsuranceHubOfferingResultServiceKey = "InsuranceHubOfferingResultService";
         public const string InsuranceHubThrowExceptionsKey = "InsuranceHubThrowExceptions";
 #endif
@@ -15,7 +15,7 @@
         private Uri _sericeUri;
         private bool _throwExceptions;
 
-#if NETFULL
+#if NETFRAMEWORK
         private bool _checkedThrowExceptionsConfig;
 #endif
 
@@ -23,7 +23,7 @@
         {
             get
             {
-#if NETFULL
+#if NETFRAMEWORK
                 if (_sericeUri == null)
                 {
                     _sericeUri = new Uri(ConfigurationManager.AppSettings[InsuranceHubOfferingResultServiceKey]);
@@ -40,7 +40,7 @@
         {
             get
             {
-#if NETFULL
+#if NETFRAMEWORK
                 if (_checkedThrowExceptionsConfig == false)
                 {
                     _checkedThrowExceptionsConfig = true;

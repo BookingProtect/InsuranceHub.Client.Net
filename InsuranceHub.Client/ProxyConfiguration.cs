@@ -1,12 +1,12 @@
 namespace InsuranceHub.Client
 {
-#if NETFULL
+#if NETFRAMEWORK
     using System.Configuration;
 #endif
 
     public class ProxyConfiguration : IProxyConfiguration
     {
-#if NETFULL
+#if NETFRAMEWORK
         public const string AddressKey = "InsuranceHubProxyAddress";
         public const string UsernameKey = "InsuranceHubProxyUsername";
         public const string PasswordKey = "InsuranceHubProxyPass";
@@ -22,7 +22,7 @@ namespace InsuranceHub.Client
         {
             get
             {
-#if NETFULL
+#if NETFRAMEWORK
                 if (string.IsNullOrWhiteSpace(_address))
                 {
                     _address = ConfigurationManager.AppSettings[AddressKey];
@@ -39,7 +39,7 @@ namespace InsuranceHub.Client
         {
             get
             {
-#if NETFULL
+#if NETFRAMEWORK
                 if (string.IsNullOrWhiteSpace(_username))
                 {
                     _username = ConfigurationManager.AppSettings[UsernameKey];
@@ -56,7 +56,7 @@ namespace InsuranceHub.Client
         {
             get
             {
-#if NETFULL
+#if NETFRAMEWORK
                 if (string.IsNullOrWhiteSpace(_password))
                 {
                     _password = ConfigurationManager.AppSettings[PasswordKey];
