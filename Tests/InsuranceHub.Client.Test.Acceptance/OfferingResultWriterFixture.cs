@@ -53,6 +53,7 @@
                     Price = 10.50, 
                     CompletionDate = DateTime.UtcNow.AddMonths(2),
                     EventName = "The Magic Flute",
+                    EventId = "TMF1",
                     VenueName = "My Big Theater",
                     PrimaryCategoryType = "Ticket",
                     SecondaryCategoryType = "Stalls",
