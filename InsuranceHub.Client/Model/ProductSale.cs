@@ -16,6 +16,8 @@ namespace InsuranceHub.Client.Model
 
         public string EventName { get; set; }
 
+        public string EventId { get; set; }
+
         public string VenueName { get; set; }
 
         public string PrimaryCategoryType { get; set; }

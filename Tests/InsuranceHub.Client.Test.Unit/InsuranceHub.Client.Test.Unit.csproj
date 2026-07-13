@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   
   <PropertyGroup>
-    <TargetFrameworks>net462;net481;netcoreapp2.1;netcoreapp3.0;netcoreapp3.1;net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>net462;net481;netcoreapp3.0;netcoreapp3.1;net8.0;net9.0;net10.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -34,32 +34,33 @@
     <DefineConstants>NET;NETX;NET9_0</DefineConstants>
   </PropertyGroup>
 
-  <!-- .NET App 2.1 -->
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1'">
-    <PackageReference Include="Microsoft.NETCore.App" Version="2.1.30" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
+  <!-- .NET 10.0 -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net10.0'">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
   </ItemGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1'">
-    <DefineConstants>NETCORE;NETCOREAPP;NETCOREAPP2_1</DefineConstants>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net9.0'">
+    <DefineConstants>NET;NETX;NET10_0</DefineConstants>
   </PropertyGroup>
 
   <!-- .NET App 3.0 -->
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0'">
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0'">
     <DefineConstants>NETCORE;NETCOREAPP;NETCOREAPP3_0</DefineConstants>
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
   </PropertyGroup>
 
   <!-- .NET App 3.1 -->
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1'">
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1'">
     <DefineConstants>NETCORE;NETCOREAPP;NETCOREAPP3_1</DefineConstants>
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
   </PropertyGroup>
 
   <!-- .NET 4.6.2 -->
